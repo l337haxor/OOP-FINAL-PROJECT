@@ -31,13 +31,14 @@ namespace Ch10CardClient
             */
             //make a test hand
             Card[] hand = new Card[4];
-            hand[0] = new Card((Suit)1, (Rank)1);
+            hand[0] = new Card((Suit)1, (Rank)3);
             hand[1] = new Card((Suit)2, (Rank)2);
             hand[2] = new Card((Suit)1, (Rank)2);
             hand[3] = new Card((Suit)1, (Rank)3);
 
             Card cribCard = new Card((Suit)1, (Rank)4);
 
+            Console.WriteLine("TEST HAND\n\n");
             Score.Calculate(hand, cribCard);
 
             Console.ReadKey();
