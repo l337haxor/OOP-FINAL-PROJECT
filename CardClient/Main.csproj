@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>Ch10CardClient.Program</StartupObject>
+    <StartupObject>ClassLibrary.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -53,9 +53,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ch10CardLib\Ch10CardLib.csproj">
+    <ProjectReference Include="..\CardLib\ClassLibrary.csproj">
       <Project>{9e3e774c-fe5e-45fe-beb1-da52f92b7a79}</Project>
-      <Name>Ch10CardLib</Name>
+      <Name>ClassLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

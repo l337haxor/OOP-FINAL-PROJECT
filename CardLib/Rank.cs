@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Ch10CardLib
+namespace ClassLibrary
 {
-    public enum Rank
+    public enum Rank : byte
     {
         Ace = 1,
         Two,
@@ -20,6 +20,5 @@ namespace Ch10CardLib
         Jack,
         Queen,
         King,
-        four,
     }
 }

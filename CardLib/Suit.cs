@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Ch10CardLib
+namespace ClassLibrary
 {
     public enum Suit
     {
