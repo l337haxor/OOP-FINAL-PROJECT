@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CardLib;
 using ClassLib;
 
 namespace ClassLib
@@ -11,28 +12,23 @@ namespace ClassLib
     {
         static void Main(string[] args)
         {
-            //make a test hand (4cards + crib card)////
-
-            // Card card1 = new Card((Suit)3, (Rank)7);
-            ///Card card2 = new Card((Suit)3, (Rank)8);
-            //Card card3 = new Card((Suit)3, (Rank)1);
-            //Card card4 = new Card((Suit)1, (Rank)1);
-
+            int score = 0;
             Hand hand = new Hand();
+          
+            Deck deck = new Deck();
 
             Card cribCard = new Card((Suit)3, (Rank)10);
-            hand.Add(new Card((Suit)1, (Rank)2));
-            hand.Add(new Card((Suit)1, (Rank)2));
-            hand.Add(new Card((Suit)1, (Rank)3));
-            hand.Add(new Card((Suit)1, (Rank)5));
-            hand.Add(cribCard);
-            /////////////////////////////////////
-
-            ////////////////////////////////////////////
-
-            Console.WriteLine("TEST HAND\n\n");
+            hand.Add(new Card((Suit)1, (Rank)8));
+            hand.Add(new Card((Suit)0, (Rank)9));
+            hand.Add(new Card((Suit)2, (Rank)8));
+            hand.Add(new Card((Suit)3, (Rank)7));
+   
             //Calculate the score
-            Score.Calculate(hand, cribCard);
+            score = Score.Calculate(hand, cribCard);
+            //Display the points awarded
+
+            Console.WriteLine("\nPoints: " + score);
+
             //pause
             Console.ReadKey();
         }
