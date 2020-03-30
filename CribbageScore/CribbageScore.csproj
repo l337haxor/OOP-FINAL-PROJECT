@@ -4,14 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F0DA4CF9-DB41-4BE0-A6EE-84A7A08BCA83}</ProjectGuid>
+    <ProjectGuid>{2E7CB861-21CF-4C25-9659-0EDB3FF3BFB5}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>CardBoxTester</RootNamespace>
-    <AssemblyName>CardBoxTester</AssemblyName>
+    <RootNamespace>CribbageScore</RootNamespace>
+    <AssemblyName>CribbageScore</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -46,16 +47,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainForm.cs">
+    <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -65,7 +66,9 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -80,6 +83,27 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\cribbagegame.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cribbagegame1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Dunedhel-Yuuyake-CD-drive.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\55f5f5e74d27602962b197c5656f1bca_old-women-playing-cards-illustrations-royalty-free-vector-_612-533.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Alecive-Flatwoken-Apps-Game-Cards.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Stats-Aha-Soft-Large-Seo-SEO.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\55f5f5e74d27602962b197c5656f1bca_old-women-playing-cards-illustrations-royalty-free-vector-_612-5331.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\CardBox\CardBox.csproj">
       <Project>{1c9c651d-4801-42de-9500-d4f887143e47}</Project>
       <Name>CardBox</Name>
@@ -87,6 +111,10 @@
     <ProjectReference Include="..\CardLib\ClassLib.csproj">
       <Project>{76ce7d18-dcc2-4259-895c-f4bf8406ac54}</Project>
       <Name>ClassLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CribTable\CribTable.csproj">
+      <Project>{53644e15-50dd-4119-818c-a0f18b165e7f}</Project>
+      <Name>CribTable</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

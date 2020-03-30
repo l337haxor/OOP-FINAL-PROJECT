@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            ClassLib.Card card1 = new ClassLib.Card();
+            Card card1 = new Card();
             this.btnFlipCard = new System.Windows.Forms.Button();
             this.cbxTestCard = new CardBox.CardBox();
             this.cmbSuits = new System.Windows.Forms.ComboBox();

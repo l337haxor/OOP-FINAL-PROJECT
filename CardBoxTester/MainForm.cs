@@ -30,7 +30,7 @@ namespace CardBoxTester
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Card theCard = new ClassLib.Card();
+            Card theCard = new Card();
             theCard.FaceUp = true;
             this.cbxTestCard.Card = theCard;
 

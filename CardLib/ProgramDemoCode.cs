@@ -51,12 +51,12 @@ namespace ClassLib
             }
 
             // Start game.
-            Game newGame = new Game();
-            newGame.SetPlayers(players);
-            int whoWon = newGame.PlayGame();
+            //Game newGame = new Game();
+            //newGame.SetPlayers(players);
+            //int whoWon = newGame.PlayGame();
 
             // Display winning player.
-            Console.WriteLine("{0} has won the game!", players[whoWon].Name);
+            //Console.WriteLine("{0} has won the game!", players[whoWon].Name);
 
             Console.ReadKey();
         }

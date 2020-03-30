@@ -10,6 +10,6 @@ namespace ClassLib
       Clubs,
       Diamonds,
       Hearts,
-      Spades,
+      Spades
    }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CardLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace ClassLib
     /// <summary>
     /// a deck of cards class
     /// </summary>
-    public class Deck
+    public class Deck : ICardDealer
     {
         /// <summary>
         /// Nondefault constructor. Allows aces to be set high.
@@ -79,6 +80,59 @@ namespace ClassLib
                 //throw the new exception
                 throw new CardOutOfRangeException(cards.Clone() as Cards);
         }
+        /// <summary>
+        /// Deals the top card
+        /// </summary>
+        /// <returns>a card</returns>
+        public Card DealTopCard()
+        {
+            if (cards.Count > 0)
+            {
+                Card card = cards[0];
+                cards.Remove(card);
+
+                return card;
+
+            }
+            else
+            {
+                //throw the new exception
+                throw new CardOutOfRangeException(cards.Clone() as Cards);
+            }
+        }
+        /// <summary>
+        /// Deals a random card
+        /// </summary>
+        /// <returns>a card</returns>
+        public Card DealRandomCard()
+        {
+            Random sourceGen = new Random();
+            int sourceCard = 0;
+            sourceCard = sourceGen.Next(0, cards.Count);
+            Card card = cards[sourceCard];
+
+            if (cards.Count > 0)
+            {
+                if (sourceCard < cards.Count)
+                {
+                    
+                    cards.Remove(card);
+                    sourceCard = sourceGen.Next(0, cards.Count);
+
+                }
+                else
+                {
+                    DealRandomCard();
+                }
+                return card;
+            }
+            else
+            {
+                //throw the new exception
+                throw new CardOutOfRangeException(cards.Clone() as Cards);
+            }
+
+        }
 
         /// <summary>
         /// Shuffles the deck
@@ -103,6 +157,15 @@ namespace ClassLib
             }
             //copies cards into the source instance
             newDeck.CopyTo(cards);
+            Console.WriteLine(cards);
+        }
+        /// <summary>
+        /// The number of cards remaining in the deck
+        /// </summary>
+        /// <returns>a number</returns>
+        public int CardsRemaining()
+        {
+            return cards.Count;
         }
     }
 }

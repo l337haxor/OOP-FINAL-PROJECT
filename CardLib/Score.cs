@@ -1,134 +1,179 @@
-﻿using System;
+﻿/*
+
+
+REFERENCE: https://github.com/msherman/Cribbage/blob/master/Cribbage.java
+
+*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClassLibrary
+namespace ClassLib
 {
     public static class Score
     {
-        static int score;
-        static int i = 0;
-
-        public static void PointsAwarded(string message, int points)
+        //Stores the score for a hand
+        static int returnScore = 0;
+      
+        /// <summary>
+        /// Output string for console 
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="points"></param>
+        public static void PointsAwarded(string message, string points)
         {
-            Console.WriteLine("\n"+ message+ " " + points + " points!\n");
+            Console.WriteLine("\n"+ message + " " + points + " points!\n");
         }
-        private static void CheckRuns(Hand hand)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hand"></param>
+        /// <param name="cribCard"></param>
+        /// <returns></returns>
+        private static int CheckRuns(Hand hand, Card cribCard)
         {
-            //int count = 4;
-            //hand.Sort(Rank);
+            //Stores points awarded
+            int score = 0;
+            //Number of runs
+            int multiplier = 1;
 
+            int currentMultiplierCard = 0;
 
-            for (int count = 4; count > 0; count--)
+            int thisCard;
+            int nextCard;
+            int currentCard;
+            StringBuilder runHandDisplay = new StringBuilder();
+
+            Hand runHand = new Hand();
+
+            for (currentCard = 0; currentCard < hand.Count - 1; currentCard++)
             {
-                //CHECK FOR 2 CARD RUN
-                if ((int)hand[count - 1].rank == (int)hand[count].rank - 1 || (int)hand[count - 1].rank == (int)hand[count].rank + 1)
+                thisCard = (int)hand[currentCard].rank;
+                nextCard = (int)hand[currentCard + 1].rank;
+
+                if (thisCard == nextCard - 1)
                 {
-                    //2 CARD RUN FOUND
-                    if ((int)hand[count - 2].rank == (int)hand[count - 1].rank - 1 || (int)hand[count - 2].rank == (int)hand[count - 1].rank + 1)
+                    //Console.WriteLine("TEST1");
+                    runHand.Add(new Card(hand[currentCard].Suit, (Rank)thisCard));
+                    
+                    score++;
+                }
+                else if (thisCard == nextCard)
+                {
+                    
+                    if (currentMultiplierCard == thisCard || currentMultiplierCard == 0)
                     {
-                        //3 CARD RUN FOUND
-                        PointsAwarded(hand[count] + "," + hand[count - 1] + "," + hand[count - 2] + " gave you a RUN OF 3 for", 3);
-                        score += 3;
+                        //Console.WriteLine("TEST2");
+                        
+                        multiplier++;
 
-                        if ((int)hand[count - 3].rank == (int)hand[count - 2].rank - 1 || (int)hand[count - 3].rank == (int)hand[count - 2].rank + 1)
+                        currentMultiplierCard = thisCard;
+                        runHand.Add(new Card(hand[currentCard].Suit, (Rank)thisCard));
+                        //runHand.Add(new Card(hand[currentCard].Suit, hand[multiplier+2].rank));
+                    }
+                    else
+                    {
+                        //Console.WriteLine("TEST3");
+                        multiplier *= 2;
+                        runHand.Add(new Card(hand[currentCard].Suit, (Rank)thisCard));
+                        
+                    }
+                }
+                else if (score < 2)
+                {
+                    Console.WriteLine("NO RUN");
+                    score = 0;
+                    multiplier = 1;
+                }
+                else
+                {
+                    //stop the loop
+                    currentCard = 99;
+                }
+            }
+
+            if (score > 1)
+            {
+
+                score = (score + 1) * multiplier;
+                runHand.Sort();
+
+                foreach (Card card in runHand)
+                {
+                    //Console.WriteLine(card);
+                    runHandDisplay.Append(card.ToString() + " ");
+                }
+                for (int count = multiplier; count > 0; count--)
+                {
+                    PointsAwarded(runHandDisplay + " gave you a RUN for", (score/multiplier).ToString());
+                }
+            }
+            
+            //return the score
+            Console.WriteLine("\nnum of runs: " + multiplier + "\n");
+            return score;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hand"></param>
+        /// <param name="cribCard"></param>
+        /// <returns></returns>
+        private static int FindFifteens(Hand hand, Card cribCard)
+        {
+            //Stores points awarded
+            int score = 0;
+            //Compare first card
+            for (int firstCard = 0; firstCard < hand.Count; firstCard++)
+            {
+                //Compare second card
+                for (int secondCard = firstCard + 1; secondCard < hand.Count; secondCard++)
+                {
+                    //Compare 2 cards
+                    if ((int)hand[firstCard].rank + (int)hand[secondCard].rank == 15)
+                    {
+                        //increase score by 2
+                        PointsAwarded(hand[firstCard] + " and " + hand[secondCard] + " gave you a 15 for", "2");
+                        score += 2;
+                    }
+
+                    //Compare third card
+                    for (int threeCard = secondCard + 1; threeCard < hand.Count; threeCard++)
+                    {
+                        //Compare 3 cards
+                        if ((int)hand[firstCard].rank + (int)hand[secondCard].rank + (int)hand[threeCard].rank == 15)
                         {
-                            //4 CARD RUN FOUND
-                            PointsAwarded(hand[count] + "," + hand[count - 1] + "," + hand[count - 2] + "," + hand[count - 3] + " gave you a RUN OF 4 for", 4);
-                            score += 1;
+                            //increase score by 2
+                            PointsAwarded(hand[firstCard] + " and " + hand[secondCard] + " and " + hand[threeCard] + " gave you a 15 for", "2");
+                            score += 2;
+                        }
 
-                            if ((int)hand[count - 4].rank == (int)hand[count - 3].rank - 1 || (int)hand[count - 4].rank == (int)hand[count - 3].rank + 1)
+                        //Compare forth card
+                        for (int fourCard = threeCard + 1; fourCard < hand.Count; fourCard++)
+                        {
+                            //Compare 4 cards
+                            if ((int)hand[firstCard].rank + (int)hand[secondCard].rank + (int)hand[threeCard].rank + (int)hand[fourCard].rank == 15)
                             {
-                                //5 CARD RUN FOUND
-                                PointsAwarded(hand[count] + "," + hand[count - 1] + "," + hand[count - 2] + "," + hand[count - 3] + "," + hand[count - 4] + " gave you a RUN OF 5 for", 5);
-                                score += 1;
+                                //increase score by 2
+                                PointsAwarded(hand[firstCard] + " and " + hand[secondCard] + " and " + hand[threeCard] + " and " + hand[fourCard] + " gave you a 15 for", "2");
+                                score += 2;
                             }
                         }
                     }
                 }
-                //Console.WriteLine(count);
-                //Console.WriteLine(hand[count]);
-                //hand.Remove(hand[count]);
             }
-        }
-                
-                
-        
-        /// <summary>
-        /// Adds the value of X amount of cards together to see if they add up to 15 
-        /// </summary>
-        /// <param name="card1">a Card object</param>
-        /// <param name="card2">a Card object</param>
-        /// <param name="card3">a Card object</param>
-        /// <returns>a score (int)</returns>
-        private static int FindFifthteens(Card card1, Card card2)
-        {
-            int score = 0;
-
-            if((int)card1.rank + (int)card2.rank == 15)
+            //Add all five cards together
+            if ((int)hand[0].rank + (int)hand[1].rank + (int)hand[2].rank + (int)hand[3].rank + (int)hand[4].rank == 15)
             {
+                //increase score by 2
+                PointsAwarded(hand[0] + " and " + hand[1] + " and " + hand[2] + " and " + hand[3] + hand[4] + " gave you a 15 for", "2");
                 score += 2;
-                PointsAwarded(card1 + " and " + card2 + " gave you a 15 for", 2);
             }
-            return score;
-        }
-        /// <summary>
-        /// Adds the value of X amount of cards together to see if they add up to 15 
-        /// </summary>
-        /// <param name="card1">a Card object</param>
-        /// <param name="card2">a Card object</param>
-        /// <returns>a score (int)</returns>
-        private static int FindFifthteens(Card card1, Card card2, Card card3)
-        {
-            int score = 0;
 
-            if ((int)card1.rank + (int)card2.rank + (int)card3.rank == 15)
-            {
-                score += 2;
-                PointsAwarded(card1 + " and " + card2 + " and " + card3 + " gave you a 15 for", 2);
-            }
-            return score;
-        }
-        /// <summary>
-        /// Adds the value of X amount of cards together to see if they add up to 15 
-        /// </summary>
-        /// <param name="card1">a Card object</param>
-        /// <param name="card2">a Card object</param>
-        /// <param name="card3">a Card object</param>
-        /// <param name="card4">a Card object</param>
-        /// <returns>a score (int)</returns>
-        private static int FindFifthteens(Card card1, Card card2, Card card3, Card card4)
-        {
-            int score = 0;
-
-            if ((int)card1.rank + (int)card2.rank + (int)card3.rank + (int)card4.rank == 15)
-            {
-                score += 2;
-                PointsAwarded(card1 + " and " + card2 + " and " + card3 + " and " + card4 + " gave you a 15 for", 2);
-            }
-            return score;
-        }
-        /// <summary>
-        /// Adds the value of X amount of cards together to see if they add up to 15 
-        /// </summary>
-        /// <param name="card1">a Card object</param>
-        /// <param name="card2">a Card object</param>
-        /// <param name="card3">a Card object</param>
-        /// <param name="card4">a Card object</param>
-        /// <param name="cribCard"> The crib card</param>
-        /// <returns>a score (int)</returns>
-        private static int FindFifthteens(Card card1, Card card2, Card card3, Card card4, Card cribCard)
-        {
-            int score = 0;
-
-            if ((int)card1.rank + (int)card2.rank + (int)card3.rank + (int)card4.rank + (int)cribCard.rank == 15)
-            {
-                score += 2;
-                PointsAwarded(card1 + " and " + card2 + " and " + card3 + " and " + card4 + " and " + cribCard +" gave you a 15 for", 2);
-            }
-           
+            //return the score
             return score;
         }
         /// <summary>
@@ -137,17 +182,28 @@ namespace ClassLibrary
         /// <param name="card1">a Card object</param>
         /// <param name="card2">a Card object</param>
         /// <returns>true/false</returns>
-        private static bool CompareCardRanks(Card card1, Card card2)
+        private static int Doubles(Hand hand, Card cribCard)
         {
-            bool value = false;
-
-            if (card1.rank == card2.rank)
+            //Stores points awarded
+            int score = 0;
+            //Loop through cards in hand
+            for (int count = 0; count < hand.Count - 1; count++)
             {
-                PointsAwarded(card1 + " and " + card2 + " gave you a pair for", 2);
-                value = true;
-            }
+                //Loop through adjacent cards
+                for (int innerCount = count + 1; innerCount < hand.Count; innerCount++)
+                {
+                    //If cards are the same (difference in hash codes)
+                    if (hand[count].CompareTo(hand[innerCount]) == 0)
+                    {
+                        //increase score
+                        PointsAwarded(hand[count] + " and " + hand[innerCount] + " is a Pair for", "2");
+                        score += 2;
+                    }
+                }
 
-            return value;
+            }
+            //return the score 
+            return score;
         }
         /// <summary>
         /// Checks to see if a card is a Jack and its suit matches the Crib Card
@@ -155,20 +211,27 @@ namespace ClassLibrary
         /// <param name="card">a Card object</param>
         /// <param name="cribCard">The Crib Card</param>
         /// <returns>true/false</returns>
-        private static bool IsNobs(Card card, Card cribCard)
+        private static int IsNobs(Hand hand, Card cribCard)
         {
-            bool value = false;
-            //If the card is a jack
-            if (card.rank == (Rank)11)
+            //Stores the return score
+            int score = 0;
+            //Loop through each card in the hand
+            foreach (Card card in hand)
             {
-                //If the Jacks suit matches the Crib Cards suit
-                if(card.suit == cribCard.suit)
+                //If the card is a jack
+                if (card.rank == (Rank)11)
                 {
-                    PointsAwarded(card + " and " + cribCard + " gave you a NOBS for", 2);
-                    value = true;
+                    //If the Jacks suit matches the Crib Cards suit
+                    if (card.suit == cribCard.suit)
+                    {
+                        PointsAwarded(card + " and " + cribCard + " gave you a NOBS for", "1");
+                        //increase score by 1
+                        score += 1;
+                    }
                 }
             }
-            return value;
+            //return the score 
+            return score;
         }
 
         /// <summary>
@@ -179,126 +242,35 @@ namespace ClassLibrary
         /// <returns>an int (The calculated score)</returns>
         public static int Calculate(Hand hand, Card cribCard)
         {
-            hand.Sort();
-            //Check for Nobs
-            foreach(Card card in hand)
+           
+            //CHECK FOR NOBS
+            returnScore += IsNobs(hand, cribCard);
+
+            //Add crib into hand for processing
+            hand.Add(cribCard);
+            //Sort the hand by lowest to highest rank
+            //hand.Sort();
+
+            //CHECK FOR DOUBLES
+            returnScore += Doubles(hand, cribCard);
+            
+            //CHECK FOR 15's
+            returnScore += FindFifteens(hand, cribCard);
+
+            //CHECK FOR RUNs
+            returnScore += CheckRuns(hand, cribCard);
+            
+            //DISPLAY HAND==================================================================
+            foreach (Card card in hand)
             {
-                //Console.WriteLine(card.ToString() +" "+ card.GetHashCode());
-                if (IsNobs(card, cribCard))
-                {
-                    score += 2;
-                }
+                Console.WriteLine(card.ToString() + " " + " Card Rank : " + (int)card.Rank);
             }
             Console.WriteLine("\nPOINTS SUMMARY\n==================================");
+            //==============================================================================
+
+            //Return the score 
             
-            /////////////////////////////////////////////////////
-            #region CHECK FOR DOUBLES
-
-            if (CompareCardRanks(hand[i], hand[i+1]))
-            {
-                score += 2;
-            }
-            if (CompareCardRanks(hand[i], hand[i+2]))
-            {
-                score += 2;
-            }
-            if (CompareCardRanks(hand[i], hand[i+3]))
-            {
-                score += 2;
-            }
-            if (CompareCardRanks(hand[i], cribCard))
-            {
-                score += 2;
-            }
-            //SECOND CARD
-            if (CompareCardRanks(hand[i+1], hand[i+2]))
-            {
-                score += 2;
-            }
-            if (CompareCardRanks(hand[i+1], hand[i+3]))
-            {
-                score += 2;
-            }
-            if (CompareCardRanks(hand[i+1], cribCard))
-            {
-                score += 2;
-            }
-            //THIRD CARD
-            if (CompareCardRanks(hand[i+2], hand[i+3]))
-            {
-                score += 2;
-            }
-            if (CompareCardRanks(hand[i+2], cribCard))
-            {
-                score += 2;
-            }
-            //FOURTH CARD
-            if (CompareCardRanks(hand[i+3], cribCard))
-            {
-                score += 2;
-            }
-            
-            #endregion
-            #region CHECK FOR 15's
-            //Card 1,2
-            score += FindFifthteens(hand[i], hand[i + 1]);
-            //Card 1,3
-            score += FindFifthteens(hand[i], hand[i + 2]);
-            //Card 1,4
-            score += FindFifthteens(hand[i], hand[i + 3]);
-            //Card 1,5
-            score += FindFifthteens(hand[i], cribCard);
-            //Card 1,2,3
-            score += FindFifthteens(hand[i], hand[i + 1], hand[i + 2]);
-            //Card 1,2,4
-            score += FindFifthteens(hand[i], hand[i + 1], hand[i + 3]);
-            //Card 1,3,4
-            score += FindFifthteens(hand[i], hand[i + 2], hand[i + 3]);
-            //Card 1,2,5
-            score += FindFifthteens(hand[i], hand[i + 1], cribCard);
-            //Card 1,3,5
-            score += FindFifthteens(hand[i], hand[i + 2], cribCard);
-            //Card 1,4,5
-            score += FindFifthteens(hand[i], hand[i + 3], cribCard);
-            //Card 1,2,3,4
-            score += FindFifthteens(hand[i], hand[i + 1], hand[i + 2], hand[i + 3]);
-
-            //Card 2,3
-            score += FindFifthteens(hand[i+1], hand[i + 2]);
-            //Card 2,4
-            score += FindFifthteens(hand[i + 1], hand[i + 3]);
-            //Card 2,5
-            score += FindFifthteens(hand[i+1], cribCard);
-            //Card 2,3,4
-            score += FindFifthteens(hand[i+1], hand[i + 2], hand[i + 3]);
-            //Card 2,3,5
-            score += FindFifthteens(hand[i + 1], hand[i + 2], cribCard);
-            //Card 2,4,5
-            score += FindFifthteens(hand[i + 1], hand[i + 3], cribCard);
-            //Card 2,3,4,5
-            score += FindFifthteens(hand[i+1], hand[i + 2], hand[i + 3], cribCard);
-
-            //Card 3,4
-            score += FindFifthteens(hand[i + 2], hand[i + 3]);
-            //Card 3,5
-            score += FindFifthteens(hand[i + 2], cribCard);
-            //Card 3,4,5
-            score += FindFifthteens(hand[i + 2], hand[i + 3], cribCard);
-
-            //Card 4,5
-            score += FindFifthteens(hand[i + 3], cribCard);
-
-            //Add all 5 cards together
-            score += FindFifthteens(hand[i], hand[i + 1], hand[i + 2], hand[i + 3], cribCard);
-
-            #endregion
-            #region CHECK FOR RUNs
-            //Check for runs
-            CheckRuns(hand);
-            #endregion
-            
-            Console.WriteLine("\nPoints: " + score);
-            return score;
+            return returnScore;
         }
     }
 }

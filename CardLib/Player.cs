@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 namespace ClassLib
 {
     /// <summary>
-    /// A playey class, (a card player)
+    /// A player class, (a card player)
     /// </summary>
     public class Player
     {

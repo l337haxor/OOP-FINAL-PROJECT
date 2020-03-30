@@ -6,94 +6,84 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace ClassLibrary
+namespace ClassLib
 {
-    public class Hand : CollectionBase
+    public class Hand : List<Card>, IEnumerable, ICloneable
     {
+        private const int MAXIMUM_HAND_SIZE = 6;
+        public int MaxHandSize
+        {
+            get { return MAXIMUM_HAND_SIZE; }
+            
+        }
+        /// <summary>
+        /// 
+        /// </summary>
         public Hand()
         {
+
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Hand"></param>
+        /// <param name="cribCard"></param>
+        public Hand(Hand Hand, Card cribCard)
+        {
+
+        }
+     
+        /// <summary>
+        /// Custom Add() method to sort the hand whenever a new card is added.
+        /// </summary>
+        /// <param name="card"></param>
+        public new void Add(Card card)
+        {
+
+            //Call base Add() method
+            base.Add(card);
+            //if adding the card exceeds the hand size limit
+            if (this.Count > MaxHandSize)
+            {
+                throw new IndexOutOfRangeException("Hand size cannot exceed " + MAXIMUM_HAND_SIZE + " cards!");
+            }
+            //To keep sorted
             Sort();
         }
-
         /// <summary>
-        /// 
+        /// Loops through the cards in a hand and displays them
         /// </summary>
-        /// <param name="newCard"></param>
-        public void Add(Card newCard)
+        public void DisplayHand()
         {
-            InnerList.Add(newCard);
-        }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="index"></param>
-        /// <param name="newCard"></param>
-        public void Insert(int index, Card newCard)
-        {
-            List.Insert(index, newCard);
-        }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="oldCard"></param>
-        public void Remove(Card oldCard)
-        {
-            List.Remove(oldCard);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="aCard"></param>
-        /// <returns></returns>
-        public bool Contains(Card aCard)
-        {
-            return List.Contains(aCard);
-        }
-        
-        public void Sort()
-        {
-            Card lowCard = new Card();
-            Console.WriteLine("\n===");
-
-            foreach (Card card in List)
+            foreach(object card in this)
             {
-                if (card.GetHashCode() <= card.GetHashCode())
-                {
-                    
-                    Console.WriteLine(card.ToString() + " " + card.GetHashCode());
-                    lowCard = card;
-                }
-            }
-            Insert(0, lowCard);
-        }
-        /// <summary>
-        /// Index property for Card List.
-        /// </summary>
-        /// <param name="pointIndex"></param>
-        /// <returns>The index in the List we want.</returns>
-        public Card this[int cardIndex]
-        {
-            get
-            {
-                return (Card)List[cardIndex];
-            }
-            set
-            {
-                List[cardIndex] = value;
+               Console.WriteLine(card.ToString());
             }
         }
-
-        public new IEnumerator GetEnumerator()
+        /// <summary>
+        /// Utility method for copying card instances into another Cards
+        /// instance—used in Deck.Shuffle(). This implementation assumes that
+        /// source and target collections are the same size.
+        /// </summary>
+        public void CopyTo(Hand targetCards)
         {
-            foreach (object card in List)
+            for (int index = 0; index < this.Count; index++)
             {
-                System.Diagnostics.Debug.WriteLine("Returning next card...");
-                //return the card
-                yield return card;
+                targetCards[index] = this[index];
             }
+        }
+        /// <summary>
+        /// Clones a list of cards
+        /// </summary>
+        /// <returns>a list of cards</returns>
+        public object Clone()
+        {
+            Hand newCards = new Hand();
+            foreach (Card sourceCard in this)
+            {
+                newCards.Add((Card)sourceCard.Clone());
+            }
+            return newCards;
         }
     }
 }

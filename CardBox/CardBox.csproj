@@ -57,7 +57,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\UsingGenerics\CardLib\ClassLib.csproj">
+    <ProjectReference Include="..\CardLib\ClassLib.csproj">
       <Project>{76ce7d18-dcc2-4259-895c-f4bf8406ac54}</Project>
       <Name>ClassLib</Name>
     </ProjectReference>

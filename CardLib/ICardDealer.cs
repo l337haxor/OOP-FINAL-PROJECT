@@ -26,7 +26,7 @@ namespace CardLib
         /// Deals a card
         /// </summary>
         /// <returns>a card</returns>
-        Card DealCard();
+        Card DealTopCard();
 
         ////
     }
