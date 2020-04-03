@@ -50,6 +50,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CardBox\CardBox.csproj">
+      <Project>{1c9c651d-4801-42de-9500-d4f887143e47}</Project>
+      <Name>CardBox</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CardLib\ClassLib.csproj">
       <Project>{76ce7d18-dcc2-4259-895c-f4bf8406ac54}</Project>
       <Name>ClassLib</Name>

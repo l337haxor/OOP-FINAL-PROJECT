@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ClassLib
 {
@@ -23,14 +24,25 @@ namespace ClassLib
     public class Player
     {
         //players name
-        public string Name { get; private set; }
+        public string PlayerName { get;  set; }
         //players hard
-        public Cards PlayHand { get; private set; }
+        public Hand PlayHand { get;  set; }
+        //players score
+        public int PlayerScore { get;  set; }
+        //players card panel
+        public Panel PlayerPanel { get; set; }
         /// <summary>
         /// Default constructor
         /// </summary>
-        private Player()
+        public Player()
         {
+
+            //create a hand
+            PlayHand = new Hand();
+            //initialize score to 0
+            PlayerScore = 0;
+            //
+            PlayerPanel = new Panel();
         }
         /// <summary>
         /// Parameterized constructor - add players name
@@ -39,30 +51,18 @@ namespace ClassLib
         public Player(string name)
         {
             //set the name
-            Name = name;
+            PlayerName = name;
             //create a hand
-            PlayHand = new Cards();
+            PlayHand = new Hand();
+            //initialize score to 0
+            PlayerScore = 0;
+            //
+            PlayerPanel = new Panel();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns>true/false</returns>
-        public bool HasWon()
+        public override string ToString()
         {
-            //return value
-            bool won = true;
-            //matching suit is card 0 suit
-            Suit match = PlayHand[0].suit;
-
-            //loop trough hand
-            for (int i = 1; i < PlayHand.Count; i++)
-            {
-                //if a card suit matches card 0 suit, won = true
-                won &= PlayHand[i].suit == match;
-            }
-
-            return won;
+            return PlayerName;
         }
     }
 }

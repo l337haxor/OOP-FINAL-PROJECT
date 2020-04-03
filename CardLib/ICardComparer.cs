@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CardLib
+namespace ClassLib
 {
     public class ICardComparer : IComparer
     {

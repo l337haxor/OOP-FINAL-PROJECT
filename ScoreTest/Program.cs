@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ClassLib;
+
 
 
 namespace ClassLib
@@ -14,6 +14,7 @@ namespace ClassLib
         {
             int score = 0;
             Hand hand = new Hand();
+            PegBoardHand pegBoardHand = new PegBoardHand();
 
             //Deck deck = new Deck();
 
@@ -27,7 +28,20 @@ namespace ClassLib
                 hand.Add(new Card((Suit)0, (Rank)6));
                 //hand.Add(new Card((Suit)2, (Rank)7));
                 //hand.Add(new Card((Suit)0, (Rank)6));
-
+                //hand.Add(new Card((Suit)0, (Rank)6));
+                pegBoardHand.Add(new Card((Suit)1, (Rank)8));
+                pegBoardHand.Add(new Card((Suit)3, (Rank)10));
+                pegBoardHand.Add(new Card((Suit)2, (Rank)7));
+                pegBoardHand.Add(new Card((Suit)0, (Rank)6));
+                pegBoardHand.Add(new Card((Suit)0, (Rank)6));
+                pegBoardHand.Add(new Card((Suit)0, (Rank)6));
+                pegBoardHand.Add(new Card((Suit)0, (Rank)6));
+                pegBoardHand.Add(new Card((Suit)0, (Rank)6));
+                pegBoardHand.Add(new Card((Suit)0, (Rank)6));
+                pegBoardHand.Add(new Card((Suit)0, (Rank)6));
+                pegBoardHand.Add(new Card((Suit)0, (Rank)6));
+                //pegBoardHand.Add(new Card((Suit)0, (Rank)6));
+                //pegBoardHand.Add(new Card((Suit)0, (Rank)6));
             }
             catch( IndexOutOfRangeException e)
             {
@@ -40,7 +54,9 @@ namespace ClassLib
             //Display the points awarded
 
             Console.WriteLine("\nPoints: " + score);
-
+            Console.WriteLine("\nHand Size: " + hand.Count);
+            Console.WriteLine("\nMAX Hand Size: " + hand.MaxHandSize);
+            pegBoardHand.DisplayHand();
             //pause
             Console.ReadKey();
         }

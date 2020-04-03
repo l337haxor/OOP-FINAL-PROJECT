@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CribTable.Properties {
+namespace FormUIDemo.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace CribTable.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CribTable.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FormUIDemo.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,47 +57,6 @@ namespace CribTable.Properties {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap _55f5f5e74d27602962b197c5656f1bca_old_women_playing_cards_illustrations_royalty_free_vector__612_533 {
-            get {
-                object obj = ResourceManager.GetObject("55f5f5e74d27602962b197c5656f1bca_old-women-playing-cards-illustrations-royalty-fr" +
-                        "ee-vector-_612-533", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Clipart_Email_1589709 {
-            get {
-                object obj = ResourceManager.GetObject("Clipart-Email-1589709", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Deck1 {
-            get {
-                object obj = ResourceManager.GetObject("Deck1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap snoopy {
-            get {
-                object obj = ResourceManager.GetObject("snoopy", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

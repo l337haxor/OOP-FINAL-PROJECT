@@ -115,6 +115,16 @@ namespace CribbageScore.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Deck {
+            get {
+                object obj = ResourceManager.GetObject("Deck", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Dunedhel_Yuuyake_CD_drive {
             get {
                 object obj = ResourceManager.GetObject("Dunedhel-Yuuyake-CD-drive", resourceCulture);

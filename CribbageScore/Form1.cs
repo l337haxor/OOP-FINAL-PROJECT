@@ -17,6 +17,7 @@ namespace CribbageScore
 
         //The number of players selected
         public int numberOfPlayers;
+        public string statusText;
 
         public FmMain()
         {
@@ -31,13 +32,14 @@ namespace CribbageScore
 
         private void btStart_Click(object sender, EventArgs e)
         {
-            
-            CribTable.Board boardForm = new CribTable.Board();
-
+            statusText = "Welcome to cribbage, to start please click on the deck to cut your card";
+            //
             numberOfPlayers = 2;
-
+            //
+            CribTable.Board boardForm = new CribTable.Board(statusText, numberOfPlayers);
+            //
             boardForm.Show();
-
+            
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -52,7 +54,7 @@ namespace CribbageScore
 
         private void FmMain_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void button1_Click(object sender, EventArgs e)

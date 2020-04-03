@@ -10,10 +10,11 @@ namespace ClassLib
 {
     public class Hand : List<Card>, IEnumerable, ICloneable
     {
-        private const int MAXIMUM_HAND_SIZE = 6;
-        public int MaxHandSize
+        protected int maximumHandSize = 6;
+
+        public virtual int MaxHandSize
         {
-            get { return MAXIMUM_HAND_SIZE; }
+            get { return maximumHandSize; }
             
         }
         /// <summary>
@@ -39,16 +40,18 @@ namespace ClassLib
         /// <param name="card"></param>
         public new void Add(Card card)
         {
-
-            //Call base Add() method
-            base.Add(card);
             //if adding the card exceeds the hand size limit
-            if (this.Count > MaxHandSize)
+            if (this.Count >= this.MaxHandSize)
             {
-                throw new IndexOutOfRangeException("Hand size cannot exceed " + MAXIMUM_HAND_SIZE + " cards!");
+                //throw new IndexOutOfRangeException("Hand size cannot exceed " + this.MaxHandSize + " cards!");
             }
-            //To keep sorted
-            Sort();
+            else
+            {
+                //Call base Add() method
+                base.Add(card);
+                //To keep sorted
+                Sort();
+            }
         }
         /// <summary>
         /// Loops through the cards in a hand and displays them

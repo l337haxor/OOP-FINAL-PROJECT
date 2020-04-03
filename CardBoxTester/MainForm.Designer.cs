@@ -1,4 +1,6 @@
-﻿namespace CardBoxTester
+﻿using ClassLib;
+
+namespace CardBoxTester
 {
     partial class MainForm
     {

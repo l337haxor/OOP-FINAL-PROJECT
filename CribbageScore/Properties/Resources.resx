@@ -139,4 +139,7 @@
   <data name="55f5f5e74d27602962b197c5656f1bca_old-women-playing-cards-illustrations-royalty-free-vector-_612-5331" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\55f5f5e74d27602962b197c5656f1bca_old-women-playing-cards-illustrations-royalty-free-vector-_612-5331.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Deck" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Deck.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

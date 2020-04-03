@@ -165,6 +165,11 @@ namespace CardBox
             myOrientation = Orientation.Vertical; // set orientation to veritcal
             myCard = card; //create a new underlying card
         }
+        public CardBox(Cards cards)
+        {
+            InitializeComponent(); // required method for designer support
+
+        }
         #endregion
 
         #region EVENTS AND EVENT HANDLERS

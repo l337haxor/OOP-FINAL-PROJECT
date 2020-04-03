@@ -1,10 +1,16 @@
-﻿using System;
+﻿/*  Program.cs - Defines the Program class for tutorial 9 
+ * 
+ *  Author:     Thom MacDonald
+ *  Author:     Sterling Wenzelbach
+ *  Since:      <2020-02-09>
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CribTable
+namespace FormUIDemo
 {
     static class Program
     {
@@ -16,7 +22,7 @@ namespace CribTable
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-           
+            Application.Run(new frmMainForm());
         }
     }
 }
